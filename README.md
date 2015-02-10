@@ -1,2 +1,1 @@
-# C-
-c++ taks
+C++ tasks during education in FMI
