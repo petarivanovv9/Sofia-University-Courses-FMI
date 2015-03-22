@@ -63,7 +63,7 @@ void ATM::checkAmount(char* userID) {
 		while (*fileContent && *fileContent != *userID) {
 			fileContent++;
 		}
-		// go throut the fileContent in order to find the specific user ID
+		// go through the fileContent in order to find the specific user ID
 		while (*fileContent && *userID && *fileContent == *userID) {
 			fileContent++;
 			userID++;
@@ -89,12 +89,12 @@ void ATM::checkAmount(char* userID) {
 		}
 
 		userID = startUser;
-		
+
 		if (*fileContent) {
 			fileContent++;
 		}
 	}
-	
+
 	if (strlen(userAmount) == 0) {
 		cout << "ID not found!" << endl;
 	}
@@ -159,7 +159,7 @@ void ATM::withdrawMoney(char* ID, double amount) {
 			counter++;
 			startAmount = counter;
 			// get the amount of money of the user
-			while (text[counter] != '\0' && text[counter] != ',') {	
+			while (text[counter] != '\0' && text[counter] != ',') {
 				idAmount[idAmountCounter] = text[counter];
 				idAmountCounter++;
 				counter++;
@@ -184,7 +184,7 @@ void ATM::withdrawMoney(char* ID, double amount) {
 			amountOfMoney -= amount;
 			idSum -= amount;
 			itoa(idSum, idAmount, 10);  // convert the integer number into char array
-			
+
 			int secondAmount = strlen(idAmount);
 
 			if (firstAmount > secondAmount) {
@@ -197,11 +197,11 @@ void ATM::withdrawMoney(char* ID, double amount) {
 			myFile.close();
 		}
 	}
-	
+
 }
 
 int main() {
-	
+
 	ATM	random(20000, "PeshoBank", "9999");
 	int answer = 0;
 	char id[10];
