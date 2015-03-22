@@ -63,7 +63,7 @@ void ATM::checkAmount(char* userID) {
 		while (*fileContent && *fileContent != *userID) {
 			fileContent++;
 		}
-
+		// go throut the fileContent in order to find the specific user ID
 		while (*fileContent && *userID && *fileContent == *userID) {
 			fileContent++;
 			userID++;
@@ -77,7 +77,7 @@ void ATM::checkAmount(char* userID) {
 				fileContent++;
 				foundUser = true;
 				int counter = 0;
-				
+				// get the user's amout of money
 				while (*fileContent && *fileContent != ',') {
 					userAmount[counter] = *fileContent;
 					counter++;
@@ -121,20 +121,20 @@ void ATM::withdrawMoney(char* ID, double amount) {
 	char* text = new char[100];
 	char c = '*';
 
-	int startPos = myFile.tellg();
+	int startPos = myFile.tellg(); // start of the file
 
 	while (c != '#') {
 		myFile.get(c);
 	}
 
-	int endPos = myFile.tellg();
+	int endPos = myFile.tellg(); // end of the file
 
 	myFile.seekg(startPos);
-	myFile.getline(text, endPos);
+	myFile.getline(text, endPos); // get the line from the file and save it into the text char array
 	myFile.close();
 
-	int counter = 0;
-	char* start = ID;
+	int counter = 0; // we will use this variable as an index
+	char* start = ID; // copy the pointer in order to iterate with ID value
 	int startAmount = 0;
 	char idAmount[10] = "";
 	int idAmountCounter = 0;
@@ -144,6 +144,7 @@ void ATM::withdrawMoney(char* ID, double amount) {
 		while (text[counter] != '\0' && text[counter] != *ID) {
 			counter++;
 		}
+		// going through the text in order to find the specific user ID
 		while (text[counter] != '\0' && *ID && text[counter] == *ID) {
 			counter++;
 			ID++;
@@ -157,8 +158,8 @@ void ATM::withdrawMoney(char* ID, double amount) {
 		else {
 			counter++;
 			startAmount = counter;
-			while (text[counter] != '\0' && text[counter] != ',')
-			{
+			// get the amount of money of the user
+			while (text[counter] != '\0' && text[counter] != ',') {	
 				idAmount[idAmountCounter] = text[counter];
 				idAmountCounter++;
 				counter++;
@@ -175,21 +176,21 @@ void ATM::withdrawMoney(char* ID, double amount) {
 	}
 	else {
 		int firstAmount = strlen(idAmount);
-		double idSum = atof(idAmount);
+		double idSum = atof(idAmount); // convert the char array into a number(integer)
 		if (idSum < amount) {
 			cout << "You do not have that kind of money!" << endl;
 		}
-		else {
+		else { // withdraw money
 			amountOfMoney -= amount;
 			idSum -= amount;
-			itoa(idSum, idAmount, 10);
+			itoa(idSum, idAmount, 10);  // convert the integer number into char array
 			
 			int secondAmount = strlen(idAmount);
 
 			if (firstAmount > secondAmount) {
 				secondAmount = firstAmount;
 			}
-
+			// change user's money after withdrawing
 			myFile.open("ATM.txt");
 			myFile.seekg(startAmount);
 			myFile.write(idAmount, secondAmount);
