@@ -1,0 +1,4 @@
+The most popular car is: Lambordgini Murcielago
+The average horse power of all cars is: 845
+Petar Ivanov 670
+Ivan Ivanov 1020
