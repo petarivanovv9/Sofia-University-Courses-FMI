@@ -15,8 +15,8 @@ class Stack {
 public:
 	Stack();
 	~Stack();
-	Stack(Stack const & other);
-	Stack& operator=(Stack const & other);
+	Stack(Stack<T> const & other);
+	Stack& operator=(Stack<T> const & other);
 
 public:
 	bool push(T);
@@ -33,7 +33,7 @@ public:
 private:
 	void init();
 	void destroy();
-	void copyFrom(Stack const & other);
+	void copyFrom(Stack<T> const & other);
 
 private:
 	Node* pTop;

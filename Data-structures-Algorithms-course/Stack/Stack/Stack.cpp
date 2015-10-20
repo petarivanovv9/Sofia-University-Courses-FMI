@@ -22,13 +22,13 @@ Stack<T>::~Stack() {
 }
 
 template <typename T>
-Stack<T>::Stack(Stack const & other) {
+Stack<T>::Stack(Stack<T> const & other) {
 	init();
 	copyFrom(other);
 }
 
 template <typename T>
-Stack<T>& Stack<T>::operator=(Stack const & other) {
+Stack<T>& Stack<T>::operator=(Stack<T> const & other) {
 	if (this != &other) {
 		destroy();
 		copyFrom(other);
@@ -57,7 +57,7 @@ void Stack<T>::destroy() {
 }
 
 template <typename T>
-void Stack<T>::copyFrom(Stack const & other) {
+void Stack<T>::copyFrom(Stack<T> const & other) {
 	if (other.isEmpty()) {
 		return;
 	}
@@ -148,3 +148,4 @@ bool Stack<T>::isEmpty() const {
 }
 
 template class Stack <int> ;
+template class Stack <double>;
