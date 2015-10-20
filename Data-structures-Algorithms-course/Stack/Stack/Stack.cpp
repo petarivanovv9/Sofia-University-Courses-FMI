@@ -1,6 +1,9 @@
 #include <exception>
+#include <assert.h>
 
 #include "Stack.h"
+
+using namespace std;
 
 template <typename T>
 Stack<T>::Node::Node(T _data, Node* _pNext) {
@@ -21,14 +24,14 @@ Stack<T>::~Stack() {
 template <typename T>
 Stack<T>::Stack(Stack const & other) {
 	init();
-	copyFrom();
+	copyFrom(other);
 }
 
 template <typename T>
 Stack<T>& Stack<T>::operator=(Stack const & other) {
 	if (this != &other) {
 		destroy();
-		copyFrom;
+		copyFrom(other);
 	}
 	
 	return *this;
@@ -36,7 +39,7 @@ Stack<T>& Stack<T>::operator=(Stack const & other) {
 
 template <typename T>
 void Stack<T>::init() {
-	this->pTop = 0;
+	this->pTop = NULL;
 	this->used = 0;
 }
 
@@ -78,41 +81,70 @@ void Stack<T>::copyFrom(Stack const & other) {
 	catch (std::bad_alloc&) {
 		destroy();
 
-		throw();
+		throw;
 	}
 }
 
 template <typename T>
 bool Stack<T>::push(T element) {
+	Node* pNewNode;
 
+	try {
+		pNewNode = new Node(element, pTop);
+	}
+	catch (...) {
+		return false;
+	}
+
+	pTop = pNewNode;
+	used++;
+
+	return true;
 }
 
 template <typename T>
 bool Stack<T>::pop(T& element) {
+	if (used == 0) {
+		return false;
+	}
 
+	element = pTop->data;
+
+	Node* pOld = pTop;
+	pTop = pTop->pNext;
+
+	delete pOld;
+
+	used--;
+
+	return true;
 }
 
 template <typename T>
 T Stack<T>::peek() const {
+	assert(used != 0);
 
+	return pTop->data;
 }
 
 template <typename T>
 void Stack<T>::removeAll() {
-
+	destroy();
 }
 
 template <typename T>
 size_t Stack<T>::getAllocatedSize() const {
-
+	return used * sizeof(Node);
 }
 
 template <typename T>
 size_t Stack<T>::getSize() const {
-
+	return used;
 }
 
 template <typename T>
 bool Stack<T>::isEmpty() const {
-
+	return used == 0;
 }
+
+template class Stack <int> ;
