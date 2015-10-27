@@ -37,12 +37,19 @@ Stack<T>& Stack<T>::operator=(Stack<T> const & other) {
 	return *this;
 }
 
+///
+/// set initial values of the properties
+///
 template <typename T>
 void Stack<T>::init() {
 	this->pTop = NULL;
 	this->used = 0;
 }
 
+///
+/// delete all values in the stack
+/// realese the allocated memory
+///
 template <typename T>
 void Stack<T>::destroy() {
 	Node* p;
@@ -56,6 +63,12 @@ void Stack<T>::destroy() {
 	init();
 }
 
+///
+/// copy the content of another stack
+///
+/// the function suggests that the stack
+///		in which we copy is empty
+///
 template <typename T>
 void Stack<T>::copyFrom(Stack<T> const & other) {
 	if (other.isEmpty()) {
@@ -85,6 +98,9 @@ void Stack<T>::copyFrom(Stack<T> const & other) {
 	}
 }
 
+///
+/// add new element at the top of the stack
+///
 template <typename T>
 bool Stack<T>::push(T element) {
 	Node* pNewNode;
@@ -102,6 +118,9 @@ bool Stack<T>::push(T element) {
 	return true;
 }
 
+///
+/// remove the element at the top of the stack
+///
 template <typename T>
 bool Stack<T>::pop() {
 	if (used == 0) {
@@ -111,12 +130,15 @@ bool Stack<T>::pop() {
 	p = pTop;
 	pTop = pTop->pNext;
 	delete p;
-	
+
 	used--;
 
 	return true;
 }
 
+///
+/// remove and return the element at the top of the stack
+///
 //template <typename T>
 //bool Stack<T>::pop(T& element) {
 //	if (used == 0) {
@@ -135,6 +157,9 @@ bool Stack<T>::pop() {
 //	return true;
 //}
 
+///
+/// return the element at the top of the stack
+///
 template <typename T>
 T Stack<T>::peek() const {
 	assert(used != 0);
