@@ -33,7 +33,7 @@ Stack<T>& Stack<T>::operator=(Stack<T> const & other) {
 		destroy();
 		copyFrom(other);
 	}
-	
+
 	return *this;
 }
 
@@ -75,7 +75,7 @@ void Stack<T>::copyFrom(Stack<T> const & other) {
 			ours = ours->pNext;
 			theirs = theirs->pNext;
 		}
-		
+
 		used = other.used;
 	}
 	catch (std::bad_alloc&) {
@@ -103,22 +103,37 @@ bool Stack<T>::push(T element) {
 }
 
 template <typename T>
-bool Stack<T>::pop(T& element) {
+bool Stack<T>::pop() {
 	if (used == 0) {
 		return false;
 	}
-
-	element = pTop->data;
-
-	Node* pOld = pTop;
+	Node* p;
+	p = pTop;
 	pTop = pTop->pNext;
-
-	delete pOld;
-
+	delete p;
+	
 	used--;
 
 	return true;
 }
+
+//template <typename T>
+//bool Stack<T>::pop(T& element) {
+//	if (used == 0) {
+//		return false;
+//	}
+//
+//	element = pTop->data;
+//
+//	Node* pOld = pTop;
+//	pTop = pTop->pNext;
+//
+//	delete pOld;
+//
+//	used--;
+//
+//	return true;
+//}
 
 template <typename T>
 T Stack<T>::peek() const {
@@ -147,5 +162,5 @@ bool Stack<T>::isEmpty() const {
 	return used == 0;
 }
 
-template class Stack <int> ;
-template class Stack <double>;
+template class Stack <int>;
+template class Stack <const char*>;

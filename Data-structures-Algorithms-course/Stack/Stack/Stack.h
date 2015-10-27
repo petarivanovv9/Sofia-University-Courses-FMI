@@ -20,14 +20,15 @@ public:
 
 public:
 	bool push(T);
-	bool pop(T&);
+	bool pop();
+	//bool pop(T&);
 	T peek() const;
 
 	void removeAll();
 
 	size_t getAllocatedSize() const;
 	size_t getSize() const;
-	
+
 	bool isEmpty() const;
 
 private:

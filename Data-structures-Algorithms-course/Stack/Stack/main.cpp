@@ -14,14 +14,18 @@ int main() {
 	peshko.push(10);
 
 	cout << peshko.peek() << std::endl;
-	
-	int a;
-	peshko.pop(a);
+
+	//int a;
+	//peshko.pop(a);
+	int a = peshko.peek();
+	peshko.pop();
 	cout << a << std::endl;
 
 	cout << peshko.peek() << std::endl;
 
-	peshko.pop(a);
+    a = peshko.peek();
+	peshko.pop();
+	//peshko.pop(a);
 	cout << a << std::endl;
 
 	cout << peshko.peek() << std::endl;
