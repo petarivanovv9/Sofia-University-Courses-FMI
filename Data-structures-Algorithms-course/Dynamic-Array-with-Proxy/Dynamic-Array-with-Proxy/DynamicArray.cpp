@@ -8,11 +8,6 @@ DynamicArray::DynamicArray() {
 
 }
 
-
-DynamicArray::~DynamicArray() {
-
-}
-
 DynamicArray::DynamicArray(DynamicArray const & other) {
 
 }
@@ -38,7 +33,7 @@ void DynamicArray::add(int element) {
 }
 
 size_t DynamicArray::getAllocatedSize() const {
-
+	
 }
 
 size_t DynamicArray::getLength() const {
@@ -63,18 +58,18 @@ DynamicArray DynamicArray::operator+(DynamicArray const& rhs) const {
 
 
 ///
-/// Връща proxy обект, който представя елемента на масива с индекс index.
+/// Returns proxy object which represents the element of the array with index "index"
 ///
-/// Тази версия на оператора се използва за неконстантни масиви и връща
-/// proxy обект, който може да се използва за промяна на клетките на масива.
+/// This version of the operator is used for non-constant arrays and returns
+/// proxy object which can be used to change the array's cells.
 ///
-/// ВАЖНО:
-/// 1. Операторът не прави проверка за това дали index
-/// е валиден индекс в масива. Такава проверка се прави
-/// всеки път, когато proxy обектът се използва.
-/// 2. proxy обектът е свързан с конкретен индекс, а не с конкретен елемент
-/// на масива. Това означава, че независимо от това какви промени се правят
-/// в динамичния масив, proxy обектът винаги ще реферира един и същ индекс.
+/// IMPORTANT!:
+/// 1. The operator doesn't make validation of the array's index.
+/// Such a validation is made each time when the proxy object is used.
+/// 2. The proxy object is connected to a special index,
+/// not with a special element in the array.
+/// This means that no matter what changes are made in the dynamic array,
+/// the proxy object will refer to the same index.
 ///
 DynamicArrayElementProxy DynamicArray::operator[](size_t index) {
 
@@ -82,11 +77,10 @@ DynamicArrayElementProxy DynamicArray::operator[](size_t index) {
 
 
 ///
-/// Връща proxy обект, който представя елемента на масива с индекс index.
+/// Returns proxy object which represents the element of the array with index "index"
 ///
-/// Тази версия на оператора се използва за константни масиви и връща
-/// константен proxy обект, който *не може* да се използва за промяна
-/// на клетките на масива.
+/// This version of the operator is used for constant arrays and returns
+/// constant proxy object that *can't* be used to change the array's cells.
 ///
 const DynamicArrayElementProxy DynamicArray::operator[](size_t index) const {
 
