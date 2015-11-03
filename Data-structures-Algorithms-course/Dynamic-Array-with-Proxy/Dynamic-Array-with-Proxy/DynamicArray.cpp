@@ -80,6 +80,7 @@ DynamicArrayElementProxy DynamicArray::operator[](size_t index) {
 
 }
 
+
 ///
 /// Връща proxy обект, който представя елемента на масива с индекс index.
 ///
