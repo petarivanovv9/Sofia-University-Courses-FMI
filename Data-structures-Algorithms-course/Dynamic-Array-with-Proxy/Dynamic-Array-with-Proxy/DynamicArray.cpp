@@ -49,35 +49,83 @@ void DynamicArray::copyFrom(DynamicArray const & other) {
 }
 
 void DynamicArray::reallocate(size_t newSize) {
+	int *pTemp = new int[newSize];
 
+	int limit = std::min(allocatedSize, newSize);
+
+	for (int i = 0; i < limit; i++) {
+		pTemp[i] = pData[i];
+	}
+
+	delete[] pData;
+	pData = pTemp;
+	allocatedSize = newSize;
 }
 
 void DynamicArray::add(int element) {
+	if (length >= allocatedSize) {
+		int newSize = (allocatedSize == 0 ? 2 : allocatedSize * 2);
 
+		reallocate;
+	}
+
+	pData[length++] = element;
 }
 
 size_t DynamicArray::getAllocatedSize() const {
-	
+	return allocatedSize;
 }
 
 size_t DynamicArray::getLength() const {
-
+	return length;
 }
 
 int DynamicArray::getAt(size_t index) const {
+	if (index >= length) {
+		throw std::out_of_range("index out of range!");
+	}
 
+	return pData[index];
 }
 
 void DynamicArray::setAt(size_t index, int value) {
+	if (index >= length) {
+		throw std::out_of_range("index out of range!");
+	}
 
+	pData[index] = value;
 }
 
 void DynamicArray::print() const {
+	std::cout
+		<< "Dynamic Array at 0x" << this
+		<< ", buffer at 0x"		 << pData
+		<< ", size ("			 << length
+		<< " / "				 << allocatedSize
+		<< ")\n";
 
+	if (length > 0) {
+		std::cout << "Contents: " << pData[0];
+
+		for (size_t i = 1; i < length; i++) {
+			std::cout << ", " << pData[i];
+		}
+		std::cout << "\n";
+	}
 }
 
+///
+/// Generate new Dynamic Array from the concatenation of
+/// the current and rhs arrays
+///
 DynamicArray DynamicArray::operator+(DynamicArray const& rhs) const {
+	DynamicArray temp(*this);
 
+	for (size_t i = 0; i < rhs.length; i++) {
+		temp.add(rhs.getAt(i));
+	}
+
+	return temp;
 }
 
 
