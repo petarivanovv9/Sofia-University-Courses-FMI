@@ -1,5 +1,6 @@
 #pragma once
 
+#include <iostream>
 #include <assert.h>
 
 #include "Node.h"
@@ -57,3 +58,168 @@ private:
 	static void destroyChain(Node<T> *pFirstNode);
 	static Node<T> *findEndOfChain(Node<T> *pFirstNode);
 };
+
+
+template <typename T>
+LinkedList<T>::LinkedList() {
+	initializerVariables();
+}
+
+///
+/// Creates a new list and copies in it the contents of another list
+///
+template <typename T>
+LinkedList<T>::LinkedList(LinkedList const & otherList) {
+
+}
+
+///
+/// Copies the contents of one list to another
+///
+template <typename T>
+LinkedList<T>& LinkedList<T>::operator=(LinkedList const * otherList) {
+
+}
+
+template <typename T>
+LinkedList<T>::~LinkedList() {
+
+}
+
+template <typename T>
+void LinkedList<T>::initializerVariables() {
+	this->pFirst = NULL;
+	this->pLast = NULL;
+	this->size = 0;
+}
+
+template <typename T>
+void LinkedList<T>::removeAll() {
+
+}
+
+///
+/// Copies and appends the contents of another list to this one
+///
+/// \return
+///			true if the function succeeds in copying the data.
+///			If it fails, the list remains unchanged and
+///			the function returns false.
+///
+template <typename T>
+bool LinkedList<T>::append(LinkedList const & otherList) {
+
+}
+
+template <typename T>
+bool LinkedList<T>::isEmpty() const {
+	return this->size == 0;
+}
+
+template <typename T>
+int LinkedList<T>::getCount() const {
+	return this->size;
+}
+
+template <typename T>
+bool LinkedList<T>::addHead(T const & data) {
+
+}
+
+template <typename T>
+bool LinkedList<T>::addTail(T const & data) {
+
+}
+
+template <typename T>
+void LinkedList<T>::removeHead() {
+
+}
+
+template <typename T>
+void LinkedList<T>::removeTail() {
+
+}
+
+template <typename T>
+T const & LinkedList<T>::getHead() {
+
+}
+
+template <typename T>
+T const & LinkedList<T>::getTail() {
+
+}
+
+template <typename T>
+bool LinkedList<T>::setHead(T const & value) {
+
+}
+
+template <typename T>
+bool LinkedList<T>::setTail(T const & value) {
+
+}
+
+///
+/// Insert an element after a specific index in the list
+///
+template <typename T>
+bool LinkedList<T>::insertAfter(int index, T const & value) {
+
+}
+
+///
+/// Insert an element before a specific index in the list
+///
+template <typename T>
+bool LinkedList<T>::insertBefore(int index, T const & value) {
+
+}
+
+///
+/// Removes the element at a specific index in the list
+///
+template <typename T>
+void LinkedList<T>::removeAt(int index) {
+
+}
+
+///
+/// Returns the value of the element at a specific index in the list
+///
+template <typename T>
+T const & LinkedList<T>::getAt(int index) const {
+
+}
+
+///
+/// Sets the value of the element at a specific index in the list
+///
+template <typename T>
+bool LinkedList<T>::setAt(int index, T const & value) {
+
+}
+
+///
+/// Finds the node at a specific index in the list
+///
+/// \return
+///			NULL if there is no such index in the list
+///
+template <typename T>
+Node<T>* LinkedList<T>::findNodeAt(int index) const {
+
+}
+
+///
+/// Searches for a node in the list, which points to another node
+///
+/// \return
+///			The address of the node we are looking for or
+///			NULL if there is no such node in the list
+///
+template <typename T>
+Node<T>* LinkedList<T>::FindNodeBefore(Node<T> *pNode) {
+
+}
