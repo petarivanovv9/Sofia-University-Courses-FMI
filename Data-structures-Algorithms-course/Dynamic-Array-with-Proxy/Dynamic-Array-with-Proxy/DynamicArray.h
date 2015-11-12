@@ -26,6 +26,7 @@ public:
 
 public:
 	DynamicArray operator+(DynamicArray const &) const;
+
 	DynamicArrayElementProxy operator[](size_t);
 	const DynamicArrayElementProxy operator[](size_t) const;
 

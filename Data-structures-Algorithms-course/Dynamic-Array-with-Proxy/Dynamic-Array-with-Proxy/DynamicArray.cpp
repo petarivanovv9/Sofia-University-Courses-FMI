@@ -40,20 +40,20 @@ void DynamicArray::copyFrom(DynamicArray const & other) {
 
 	pData = new int[other.allocatedSize];
 
-	for (int i = 0; i < other.length; i++) {
+	for (size_t i = 0; i < other.length; i++) {
 		pData[i] = other.pData[i];
 	}
 
-	allocatedSize = other.getAllocatedSize;
+	allocatedSize = other.allocatedSize;
 	length = other.length;
 }
 
 void DynamicArray::reallocate(size_t newSize) {
 	int *pTemp = new int[newSize];
 
-	int limit = std::min(allocatedSize, newSize);
+	size_t limit = std::min(allocatedSize, newSize);
 
-	for (int i = 0; i < limit; i++) {
+	for (size_t i = 0; i < limit; i++) {
 		pTemp[i] = pData[i];
 	}
 
@@ -66,7 +66,7 @@ void DynamicArray::add(int element) {
 	if (length >= allocatedSize) {
 		int newSize = (allocatedSize == 0 ? 2 : allocatedSize * 2);
 
-		reallocate;
+		reallocate(newSize);
 	}
 
 	pData[length++] = element;
@@ -144,7 +144,7 @@ DynamicArray DynamicArray::operator+(DynamicArray const& rhs) const {
 /// the proxy object will refer to the same index.
 ///
 DynamicArrayElementProxy DynamicArray::operator[](size_t index) {
-
+	return DynamicArrayElementProxy(this, index);
 }
 
 
@@ -155,22 +155,24 @@ DynamicArrayElementProxy DynamicArray::operator[](size_t index) {
 /// constant proxy object that *can't* be used to change the array's cells.
 ///
 const DynamicArrayElementProxy DynamicArray::operator[](size_t index) const {
-
+	return DynamicArrayElementProxy(const_cast<DynamicArray*>(this), index);
 }
 
 
 /// ============================================================================
 
 
-DynamicArrayElementProxy::DynamicArrayElementProxy(DynamicArray * pDynamicArray, size_t elementIndex) :
-pParent(pDynamicArray),
-parentElementIndex(elementIndex) {
+DynamicArrayElementProxy::DynamicArrayElementProxy(DynamicArray * pDynamicArray, size_t elementIndex) : 
+pParent(pDynamicArray), parentElementIndex(elementIndex) 
+{
 }
 
 DynamicArrayElementProxy::operator int() const {
-
+	return pParent->getAt(parentElementIndex);
 }
 
 DynamicArrayElementProxy & DynamicArrayElementProxy::operator=(int value) {
+	pParent->setAt(parentElementIndex, value);
 
+	return *this;
 }
