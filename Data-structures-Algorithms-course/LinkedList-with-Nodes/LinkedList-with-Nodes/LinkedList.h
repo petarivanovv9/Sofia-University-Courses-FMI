@@ -77,7 +77,7 @@ LinkedList<T>::LinkedList(LinkedList const & otherList) {
 /// Copies the contents of one list to another
 ///
 template <typename T>
-LinkedList<T>& LinkedList<T>::operator=(LinkedList const * otherList) {
+LinkedList<T>& LinkedList<T>::operator=(LinkedList const & otherList) {
 
 }
 
@@ -220,7 +220,7 @@ Node<T>* LinkedList<T>::findNodeAt(int index) const {
 ///			NULL if there is no such node in the list
 ///
 template <typename T>
-Node<T>* LinkedList<T>::FindNodeBefore(Node<T> *pNode) {
+Node<T>* LinkedList<T>::FindNodeBefore(Node<T> *pNode) const {
 
 }
 
