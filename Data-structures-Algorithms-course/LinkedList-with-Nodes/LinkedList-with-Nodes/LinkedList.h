@@ -4,6 +4,7 @@
 #include <assert.h>
 
 #include "Node.h"
+#include "Iterator.h"
 
 ///
 /// A single-linked list
@@ -48,6 +49,8 @@ public:
 	void removeAt(int);
 	T const & getAt(int) const;
 	bool setAt(int, T const &);
+
+	Iterator<T> getIterator() const;
 
 private:
 	Node<T>* findNodeAt(int) const;
@@ -222,6 +225,15 @@ Node<T>* LinkedList<T>::findNodeAt(int index) const {
 template <typename T>
 Node<T>* LinkedList<T>::FindNodeBefore(Node<T> *pNode) const {
 
+}
+
+
+///
+/// Return a new iterator for this list
+///
+template <typename T>
+Iterator<T> LinkedList<T>::getIterator() const {
+	return Iterator<T>(this->pFirst);
 }
 
 
