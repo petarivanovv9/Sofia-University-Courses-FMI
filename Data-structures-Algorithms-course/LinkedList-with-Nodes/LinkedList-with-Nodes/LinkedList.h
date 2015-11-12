@@ -223,3 +223,40 @@ template <typename T>
 Node<T>* LinkedList<T>::FindNodeBefore(Node<T> *pNode) {
 
 }
+
+
+//-----------------------------------------------------------------------
+// OPERATIONS ON CHAINS
+
+///
+/// Clones a chain of nodes
+///
+/// The function receives a pointer to the first node
+/// in a chain of nodes and creates a new, identical chain.
+///
+/// If the function fails it returns NULL.
+/// Otherwise it returns a pointer to the first node
+/// of the new chain.
+///
+template <typename T>
+Node<T>* LinkedList<T>::cloneChain(Node<T> *pfirstNode) {
+
+}
+
+///
+/// Destroys all nodes in a chain
+///
+/// \param [in] pFirstNode
+///			A pointer to the first node in the chain.
+template <typename T>
+void LinkedList<T>::destroyChain(Node<T> *pFirstNode) {
+
+}
+
+///
+/// Returns a pointer to the last node in a chain
+///
+template <typename T>
+Node<T>* LinkedList<T>::findEndOfChain(Node<T> *pfirstNode) {
+
+}
