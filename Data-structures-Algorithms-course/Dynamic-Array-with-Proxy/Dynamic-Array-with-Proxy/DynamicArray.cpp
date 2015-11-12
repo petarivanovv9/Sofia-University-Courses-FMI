@@ -5,23 +5,47 @@
 
 
 DynamicArray::DynamicArray() {
-
+	pData = NULL;
+	allocatedSize = 0;
+	length = 0;
 }
 
 DynamicArray::DynamicArray(DynamicArray const & other) {
-
+	copyFrom(other);
 }
 
 DynamicArray& DynamicArray::operator=(DynamicArray const & other) {
+	if (this != &other) {
+		free();
+		copyFrom(other);
+	}
 
+	return *this;
 }
 
 DynamicArray::~DynamicArray() {
-
+	free();
 }
 
 void DynamicArray::free() {
+	delete[] pData;
 
+	pData = NULL;
+	allocatedSize = 0;
+	length = 0;
+}
+
+void DynamicArray::copyFrom(DynamicArray const & other) {
+	free();
+
+	pData = new int[other.allocatedSize];
+
+	for (int i = 0; i < other.length; i++) {
+		pData[i] = other.pData[i];
+	}
+
+	allocatedSize = other.getAllocatedSize;
+	length = other.length;
 }
 
 void DynamicArray::reallocate(size_t newSize) {
