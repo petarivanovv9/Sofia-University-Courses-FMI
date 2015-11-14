@@ -54,7 +54,7 @@ public:
 
 private:
 	Node<T>* findNodeAt(int) const;
-	Node<T>* FindNodeBefore(Node<T> *pNode) const;
+	Node<T>* findNodeBefore(Node<T> *pNode) const;
 
 private:
 	static Node<T> *cloneChain(Node<T> *pFirstNode);
@@ -236,7 +236,11 @@ void LinkedList<T>::removeAt(int index) {
 ///
 template <typename T>
 T const & LinkedList<T>::getAt(int index) const {
+	Node<T> *pNode = findNodeAt(index);
 
+	assert(pNode != NULL);
+
+	return pNode->data;
 }
 
 ///
@@ -244,7 +248,13 @@ T const & LinkedList<T>::getAt(int index) const {
 ///
 template <typename T>
 bool LinkedList<T>::setAt(int index, T const & value) {
+	Node<T> *pNode = findNodeAt(index);
 
+	if (pNode != NULL) {
+		pNode->data = value;
+	}
+
+	return pNode != NULL;
 }
 
 ///
@@ -255,7 +265,18 @@ bool LinkedList<T>::setAt(int index, T const & value) {
 ///
 template <typename T>
 Node<T>* LinkedList<T>::findNodeAt(int index) const {
+	if (index < 0 || index >= this->size) {
+		return NULL;
+	}
+	else {
+		Node<T> *p = this->pFirst;
 
+		for (int i = 0; i < index; i++) {
+			p = p->pNext;
+		}
+
+		return p;
+	}
 }
 
 ///
@@ -266,8 +287,17 @@ Node<T>* LinkedList<T>::findNodeAt(int index) const {
 ///			NULL if there is no such node in the list
 ///
 template <typename T>
-Node<T>* LinkedList<T>::FindNodeBefore(Node<T> *pNode) const {
+Node<T>* LinkedList<T>::findNodeBefore(Node<T> *pNode) const {
+	Node<T> *pCurrent = this->pFirst;
 
+	while (pCurrent && pCurrent->pNext != pNode) {
+		pCurrent = pCurrent->pNext;
+	}
+
+	// At this point, if we have reached the end of the list
+	// without finding the desired node, pCurrent is NULL.
+	// Otherwise it points to the books we are looking for.
+	return pCurrent;
 }
 
 
