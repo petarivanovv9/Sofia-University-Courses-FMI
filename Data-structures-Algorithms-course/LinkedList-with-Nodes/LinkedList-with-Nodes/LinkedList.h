@@ -325,7 +325,34 @@ Iterator<T> LinkedList<T>::getIterator() const {
 ///
 template <typename T>
 Node<T>* LinkedList<T>::cloneChain(Node<T> *pfirstNode) {
+	if (pfirstNode) {
 
+		// pointer to the start of the new chain
+		Node<T> *pNewChain = new Node(pfirstNode);
+
+		// pointer to the element that we have to copy next
+		Node<T> *pReadFrom = pfirstNode->pNext;
+
+		// pointer to the element after which we have to copy the new element
+		Node<T> *pWriteAfter = pNewChain;
+
+		while (pReadFrom) {
+			if ( ! pWriteAfter) {
+				destroyChain(pNewChain);
+				pNewChain = NULL;
+				break;
+			}
+
+			pWriteAfter->pNext = new Node(pReadFrom);
+			pWriteAfter = pWriteAfter->pNext;
+
+			pReadFrom = pReadFrom->pNext;
+		}
+
+		return pNewChain;
+	}
+
+	return NULL;
 }
 
 ///
@@ -335,7 +362,14 @@ Node<T>* LinkedList<T>::cloneChain(Node<T> *pfirstNode) {
 ///			A pointer to the first node in the chain.
 template <typename T>
 void LinkedList<T>::destroyChain(Node<T> *pFirstNode) {
+	Node<T> *pCurrent = pFirstNode;
+	Node<T> *pOld = pFirstNode;
 
+	while (pCurrent) {
+		pOld = pCurrent;
+		pCurrent = pCurrent->pNext;
+		delete pOld;
+	}
 }
 
 ///
@@ -343,5 +377,13 @@ void LinkedList<T>::destroyChain(Node<T> *pFirstNode) {
 ///
 template <typename T>
 Node<T>* LinkedList<T>::findEndOfChain(Node<T> *pfirstNode) {
+	Node<T> pCurrent = pFirstNode;
 
+	if (pCurrent) {
+		while (pCurrent->pNext) {
+			pCurrent = pCurrent->pNext;
+		}
+	}
+
+	return pCurrent;
 }
