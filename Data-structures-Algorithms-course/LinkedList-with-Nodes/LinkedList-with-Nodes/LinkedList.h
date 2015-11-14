@@ -126,12 +126,39 @@ int LinkedList<T>::getCount() const {
 
 template <typename T>
 bool LinkedList<T>::addHead(T const & data) {
+	Node<T> *pNewNode = new Node<T>(data, this->pFirst);
 
+	if (pNewNode) {
+		if (this->isEmpty()) {
+			this->pFirst = pNewNode;
+		}
+
+		this->pFirst = pNewNode;
+
+		this->size++;
+	}
+
+	return pNewNode != NULL;
 }
 
 template <typename T>
 bool LinkedList<T>::addTail(T const & data) {
+	Node<T> *pNewNode = new Node<T>(data);
 
+	if (pNewNode) {
+		if (this->isEmpty()) {
+			this->pFirst = pNewNode;
+			this->pLast = pNewNode;
+		} 
+		else {
+			this->pLast->pNext = pNewNode;
+			this->pLast = pNewNode;
+		}
+
+		this->size++;
+	}
+
+	return pNewNode != NULL;
 }
 
 template <typename T>
@@ -146,22 +173,38 @@ void LinkedList<T>::removeTail() {
 
 template <typename T>
 T const & LinkedList<T>::getHead() {
-
+	assert( ! this->isEmpty() );
+	
+	return this->pFirst->data;
 }
 
 template <typename T>
 T const & LinkedList<T>::getTail() {
+	assert( ! this->isEmpty() );
 
+	return this->pLast->data;
 }
 
 template <typename T>
 bool LinkedList<T>::setHead(T const & value) {
-
+	if ( ! this->isEmpty() ) {
+		this->pFirst->data = value;
+		return true
+	}
+	else {
+		return false;
+	}
 }
 
 template <typename T>
 bool LinkedList<T>::setTail(T const & value) {
-
+	if ( ! this->isEmpty() ) {
+		this->pLast->data = value;
+		return true;
+	}
+	else {
+		return false;
+	}
 }
 
 ///
