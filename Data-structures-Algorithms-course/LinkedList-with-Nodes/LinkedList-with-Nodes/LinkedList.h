@@ -98,7 +98,9 @@ void LinkedList<T>::initializerVariables() {
 
 template <typename T>
 void LinkedList<T>::removeAll() {
+	destroyChain(this->pFirst);
 
+	initializerVariables();
 }
 
 ///
@@ -111,7 +113,21 @@ void LinkedList<T>::removeAll() {
 ///
 template <typename T>
 bool LinkedList<T>::append(LinkedList const & otherList) {
+	// if there is nothing to copy, don't copy
+	if (otherList.isEmpty()) {
+		return true;
+	}
+	else {
+		// try to clone the data from the other list
+		Node<T> *pNewChain = cloneChain(otherList.pFirst);
 
+		if (pNewChain) {
+			this->pLast->pNext = pNewChain;
+			this->pLast = findEndOfChain(pNewChain);
+		}
+
+		return pNewChain != NULL;
+	}
 }
 
 template <typename T>
@@ -163,12 +179,33 @@ bool LinkedList<T>::addTail(T const & data) {
 
 template <typename T>
 void LinkedList<T>::removeHead() {
+	// we can only remove the head of a non-empty list
+	if ( ! this->isEmpty() ) {
+		assert(this->pFirst != NULL);
 
+		// this pointer will keep the address of the old first node
+		Node<T> *pOldHead = this->pFirst;
+
+		// Advance the first element pointer with one position forward
+		this->pFirst = this->pFirst->pNext;
+
+		// if this was the last element, the list is now empty and we have
+		// to set the last element pointer to NULL
+		if (this->pFirst == NULL) {
+			this->pLast = NULL;
+		}
+
+		this->size--;
+
+		delete pOldHead;
+	}
 }
 
 template <typename T>
 void LinkedList<T>::removeTail() {
-
+	if ( ! this->isEmpty() ) {
+		removeAt(this->size - 1);
+	}
 }
 
 template <typename T>
