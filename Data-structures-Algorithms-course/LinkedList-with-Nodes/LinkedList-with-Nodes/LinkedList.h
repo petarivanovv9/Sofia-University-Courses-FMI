@@ -73,7 +73,8 @@ LinkedList<T>::LinkedList() {
 ///
 template <typename T>
 LinkedList<T>::LinkedList(LinkedList const & otherList) {
-
+	initializerVariables();
+	append(otherList);
 }
 
 ///
@@ -81,12 +82,17 @@ LinkedList<T>::LinkedList(LinkedList const & otherList) {
 ///
 template <typename T>
 LinkedList<T>& LinkedList<T>::operator=(LinkedList const & otherList) {
+	if (this != &otherList) {
+		removeAll();
+		append(otherList);
+	}
 
+	return *this;
 }
 
 template <typename T>
 LinkedList<T>::~LinkedList() {
-
+	removeAll();
 }
 
 template <typename T>
@@ -249,7 +255,32 @@ bool LinkedList<T>::setTail(T const & value) {
 ///
 template <typename T>
 bool LinkedList<T>::insertAfter(int index, T const & value) {
+	// try to find the node at the specified node
+	Node<T> *pNodeAtIndex = findNodeAt(index);
 
+	// if there is such node, try to insert an element after it
+	if (pNodeAtIndex) {
+		Node<T> *pNewNode = new Node<T>(value, pNodeAtIndex->pNext);
+
+		// if memory allocation fails, return false
+		if ( ! pNewNode) {
+			return false;
+		}
+
+		// make the node at the desired index point to the new node
+		pNodeAtIndex->pNext = pNewNode;
+
+		if (pNodeAtIndex == this->pFirst) {
+			this->pLast = pNewNode;
+		}
+
+		this->size++;
+
+		return true;
+	}
+	else {
+		return false;
+	}
 }
 
 ///
@@ -257,7 +288,12 @@ bool LinkedList<T>::insertAfter(int index, T const & value) {
 ///
 template <typename T>
 bool LinkedList<T>::insertBefore(int index, T const & value) {
-
+	if (index == 0) {
+		return addHead(value);
+	}
+	else {
+		return insertAfter(index - 1, value);
+	}
 }
 
 ///
@@ -265,8 +301,35 @@ bool LinkedList<T>::insertBefore(int index, T const & value) {
 ///
 template <typename T>
 void LinkedList<T>::removeAt(int index) {
+	if (index == 0) {
+		this->removeHead();
+	}
+	// Here we should have that:
+	// (1) There are at least two elements in the list
+	// (2) index != 0
+	// (3) we are not trying to remove the first element
+	else {
+		assert(this->getCount() >= 2);
 
-}
+		// find the node before the one we want to remove
+		Node<T> *pNodeBeforeIndex = findNodeAt(index - 1);
+
+		// make sure the index is valid
+		assert(pNodeBeforeIndex != NULL);
+
+		Node<T> *pNodeAtIndex = pNodeBeforeIndex->pNext;
+
+		if (index == this->size - 1) {
+			this->pLast = pNodeBeforeIndex;
+		}
+
+		pNodeBeforeIndex->pNext = pNodeAtIndex->pNext;
+
+		delete pNodeAtIndex;
+
+		this->size--;
+	}
+} 
 
 ///
 /// Returns the value of the element at a specific index in the list
