@@ -23,7 +23,7 @@ public:
 ///
 template <typename T>
 Iterator<T>::Iterator(Node<T> *pStart) {
-
+	this->pStart = this->pCurrent = pStart;
 }
 
 ///
@@ -31,7 +31,9 @@ Iterator<T>::Iterator(Node<T> *pStart) {
 ///
 template <typename T>
 T const & Iterator<T>::getCurrent() const {
-
+	assert( ! this->endReached() );
+	
+	return this->pCurrent->data;
 }
 
 ///
@@ -39,7 +41,9 @@ T const & Iterator<T>::getCurrent() const {
 ///
 template <typename T>
 void Iterator<T>::setCurrent(T const & value) {
+	assert( ! this->endReached() );
 
+	this->pCurrent->data = value;
 }
 
 ///
@@ -50,7 +54,9 @@ void Iterator<T>::setCurrent(T const & value) {
 ///
 template <typename T>
 void Iterator<T>::moveNext() {
-
+	if (this->pCurrent) {
+		this->pCurrent = this->pCurrent->pNext;
+	}
 }
 
 ///
@@ -58,7 +64,7 @@ void Iterator<T>::moveNext() {
 ///
 template <typename T>
 void Iterator<T>::rewind() {
-
+	this->pCurrent = this->pStart;
 }
 
 ///
@@ -70,5 +76,5 @@ void Iterator<T>::rewind() {
 ///
 template <typename T>
 bool Iterator<T>::endReached() const {
-
+	return this->pCurrent == NULL;
 }
