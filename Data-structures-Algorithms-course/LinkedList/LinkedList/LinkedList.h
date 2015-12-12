@@ -12,9 +12,9 @@ template <typename T>
 class LinkedList {
 
 private:
-	Node<T>* front;
-	Node<T>* back;
-	int size;
+	Node<T>* pFront;
+	Node<T>* pBack;
+	int _size;
 
 private:
 	void copy(const LinkedList<T> & other);
@@ -24,7 +24,7 @@ private:
 	Node<T>* getAt(Node<T>* start, int index);
 
 public:
-	LinkedList() : front(NULL), back(NULL), size(0) {};
+	LinkedList() : pFront(NULL), pBack(NULL), _size(0) {};
 	LinkedList(const LinkedList<T> & other);
 	LinkedList<T>& operator=(const LinkedList<T> & other);
 	~LinkedList();
@@ -42,8 +42,8 @@ public:
 	void pop_front();
 	void pop_back();
 
-	T& getFront() const;
-	int getSize() const;
+	T& front() const;
+	int size() const;
 	bool empty() const;
 	void clear();
 };
@@ -58,26 +58,26 @@ void LinkedList<T>::clear() {
 	while (!this->empty()) {
 		pop_front();
 	}
-	this->size = 0;
-	this->front = NULL;
-	this->back = NULL;
+	this->_size = 0;
+	this->pFront = NULL;
+	this->pBack = NULL;
 }
 
 template <typename T>
 void LinkedList<T>::copy(const LinkedList<T> & other) {
-	Node<T>* otherFront = other.front;
+	Node<T>* otherFront = other.pFront;
 
 	while (otherFront != NULL) {
 		push_back(otherFront->data);
 		otherFront = otherFront->next;
 	}
 
-	this->size = other.size;
+	this->_size = other._size;
 }
 
 template <typename T>
 LinkedList<T>::LinkedList(const LinkedList<T> & other)
-:front(NULL), back(NULL), size(0) {
+:pFront(NULL), pBack(NULL), _size(0) {
 	copy(other);
 }
 
@@ -99,22 +99,22 @@ void LinkedList<T>::push_front(const T & data) {
 		return;
 	}
 
-	if (this->front != NULL) {
-		newNode->next = this->front;
-		this->front = newNode;
+	if (this->pFront != NULL) {
+		newNode->next = this->pFront;
+		this->pFront = newNode;
 	}
 	else {
-		this->front = newNode;
+		this->pFront = newNode;
 	}
 
-	this->front->data = data;
+	this->pFront->data = data;
 
-	if (back == NULL) {
-		back = front;
-		back->next = NULL;
+	if (this->pBack == NULL) {
+		this->pBack = pFront;
+		this->pBack->next = NULL;
 	}
 
-	this->size++;
+	this->_size++;
 }
 
 template <typename T>
@@ -126,85 +126,85 @@ void LinkedList<T>::push_back(const T & data) {
 		return;
 	}
 
-	if (this->back != NULL) {
-		this->back->next = newNode;
-		this->back = newNode;
+	if (this->pBack != NULL) {
+		this->pBack->next = newNode;
+		this->pBack = newNode;
 	}
 	else {
-		this->back = newNode;
+		this->pBack = newNode;
 	}
 
-	this->back->data = data;
-	this->back->next = NULL;
+	this->pBack->data = data;
+	this->pBack->next = NULL;
 
-	if (this->front == NULL) {
-		this->front = this->back;
+	if (this->pFront == NULL) {
+		this->pFront = this->pBack;
 	}
 
-	this->size++;
+	this->_size++;
 }
 
 template <typename T>
 void LinkedList<T>::pop_front() {
-	if (this->front == NULL) {
+	if (this->pFront == NULL) {
 		std::cerr << "Trying to pop from an empty list!\n";
 		return;
 	}
 
-	Node<T>* oldNode = this->front;
-	this->front = this->front->next;
+	Node<T>* oldNode = this->pFront;
+	this->pFront = this->pFront->next;
 	delete oldNode;
 
-	if (this->front == NULL) {
-		this->back = NULL;
+	if (this->pFront == NULL) {
+		this->pBack = NULL;
 	}
 
-	this->size--;
+	this->_size--;
 }
 
 template <typename T>
 void LinkedList<T>::pop_back() {
-	if (this->back == NULL) {
+	if (this->pBack == NULL) {
 		std::cerr << "Trying to pop from an empty list!\n";
 		return;
 	}
 
-	Node<T>* oldNode = this->back;
-	if (size == 1) {
-		this->back = NULL;
+	Node<T>* oldNode = this->pBack;
+	if (this->_size == 1) {
+		this->pBack = NULL;
 	}
 	else {
-		this->back = getAt(front, size - 1);
-		this->back->next = NULL;
+		this->pBack = getAt(pFront, this->_size - 1);
+		this->pBack->next = NULL;
 	}
 
 	delete oldNode;
 
-	if (this->back == NULL) {
-		this->front = NULL;
+	if (this->pBack == NULL) {
+		this->pFront = NULL;
 	}
 
-	this->size--;
+	this->_size--;
 }
 
 template <typename T>
-int LinkedList<T>::getSize() const {
-	return this->size;
+int LinkedList<T>::size() const {
+	return this->_size;
 }
 
 template <typename T>
-T& LinkedList<T>::getFront() const {
-	return this->front->data;
+T& LinkedList<T>::front() const {
+	return this->pFront->data;
 }
 
 template <typename T>
 bool LinkedList<T>::empty() const {
-	return this->front == NULL;
+	return this->pFront == NULL;
 }
 
 template <typename T>
 void LinkedList<T>::mergeSort() {
-	this->front = MS(this->front, this->size);
+	this->pFront = MS(this->pFront, this->_size);
 }
 
 template <typename T>
@@ -274,7 +274,7 @@ Node<T>* LinkedList<T>::merge(Node<T>* left, Node<T>* right) {
 
 template<class T>
 Node<T>* LinkedList<T>::getAt(Node<T>* start, int index) {
-	if (index > size || index <= 0) {
+	if (index > this->_size || index <= 0) {
 		std::cerr << "Wrong index\n";
 		return NULL;
 	}
@@ -290,10 +290,10 @@ Node<T>* LinkedList<T>::getAt(Node<T>* start, int index) {
 
 template<class T>
 bool LinkedList<T>::operator>(const LinkedList<T> & other) const {
-	return this->size > other.size;
+	return this->_size > other._size;
 }
 
 template<class T>
 bool LinkedList<T>::operator>=(const LinkedList<T> & other) const {
-	return this->size >= other.size;
+	return this->_size >= other._size;
 }
