@@ -1,0 +1,67 @@
+1
+59 9
+anko veskoo wakara zombie bogi conko tanche yoan fokera gocko 
+elena hacho mincho ilsyy jokera llili doncho encho moncho noa 
+hoske opusum peshko radkoo salamcho atanas teodor usakis anita 
+ancko vesoo waara zoombie bovgi coxnko txanche yhoan fokkera gzocko 
+elenka hakpho mincho ilsyfy jopkera llili dooncho encho moncvho noaad 
+hoskree opusm peshkoo rafdkoo salamcho atanas teodor usabkis anidta jopa 
+QUERY jopv
+QUERY zombie
+QUERY t
+QUERY peshko
+ENTER 0 5
+QUERY t
+QUERY an
+QUERY tren
+QUERY fokera
+
+----------------------------------------
+
+1
+6 8
+ivan mitko joro peshe tobi tob
+ENTER 0 1
+QUERY jor
+ENTER 3 4
+QUERY t
+QUERY j
+QUERY tobi
+QUERY tob
+QUERY to
+
+----------------------------------------
+
+1
+2 4
+tob tobi
+QUERY t
+QUERY to
+QUERY tob
+QUERY tobi
+
+----------------------------------------
+
+1
+4 2
+eli mama pesho maq
+QUERY ma
+QUERY elica
+
+-----------------------------------------
+
+2
+6 8
+ivan mitko joro peshe tobi tob
+ENTER 0 1
+QUERY jor
+ENTER 3 4
+QUERY t
+QUERY j
+QUERY tobi
+QUERY tob
+QUERY to
+4 2
+eli mama pesho maq
+QUERY ma
+QUERY elica
