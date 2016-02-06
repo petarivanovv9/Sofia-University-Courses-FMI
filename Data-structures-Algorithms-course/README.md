@@ -6,6 +6,7 @@
 3. **Dynamic Array with Proxy**
 4. **Linked List**
 5. **Binary Search Tree - BST**
+6. **Min Binary Heap**
 
 ## Homeworks from the course
 1. **Homework 1**
