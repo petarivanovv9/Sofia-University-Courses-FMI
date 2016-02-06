@@ -5,6 +5,7 @@
 2. **Queue with Linked Nodes**
 3. **Dynamic Array with Proxy**
 4. **Linked List**
+5. **Binary Search Tree - BST**
 
 ## Homeworks from the course
 1. **Homework 1**
