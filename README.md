@@ -1,6 +1,6 @@
 # C++ tasks during education in FMI.
 
-## Data Structures and Algorithms
+## Data Structures and Algorithms with C++ course
 
 #### Data structures implemented in C++
 1. **Stack with Linked Nodes**
@@ -18,3 +18,7 @@
 #### Other tasks
 1. **RPN** - Reverse Polish notation
 2. **Braces**
+
+## Object Oriented Programming with C++ course
+
+## Introduction to Programming with C++ course
