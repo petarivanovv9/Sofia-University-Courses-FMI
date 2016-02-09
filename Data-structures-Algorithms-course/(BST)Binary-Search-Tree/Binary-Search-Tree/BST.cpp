@@ -69,6 +69,7 @@ bool BST::removeValue(int val) {
 	}
 	else {
 		removeHelper(this->root, val);
+		return true;
 	}
 }
 
