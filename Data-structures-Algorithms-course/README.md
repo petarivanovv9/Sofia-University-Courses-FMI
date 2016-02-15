@@ -8,6 +8,10 @@
 5. **Binary Search Tree - BST**
 6. **Min Binary Heap**
 
+## Sorting algorithms implemented in C++
+1. **Merge sort on array**
+2. **Merge sort on linked list**
+
 ## Homeworks from the course
 1. **Homework 1**
 2. **Homework 2**
