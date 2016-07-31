@@ -9,6 +9,8 @@
 4. [**Linked List**] (https://github.com/pepincho/C-plus-plus-Courses-FMI/tree/master/Data-structures-Algorithms-course/LinkedList)
 5. [**Binary Search Tree - BST**] (https://github.com/pepincho/C-plus-plus-Courses-FMI/tree/master/Data-structures-Algorithms-course/(BST)Binary-Search-Tree)
 6. [**Min Binary Heap**] (https://github.com/pepincho/C-plus-plus-Courses-FMI/tree/master/Data-structures-Algorithms-course/Min-Binary-Heap)
+7. [**Trie (prefix tree)**] (https://github.com/pepincho/C-plus-plus-Courses-FMI/tree/master/Data-structures-Algorithms-course/Trie%20(prefix%20tree))
+8. [**Tree**] (https://github.com/pepincho/C-plus-plus-Courses-FMI/tree/master/Data-structures-Algorithms-course/Tree)
 
 #### Homeworks from the course
 1. [**Homework 1**] (https://github.com/pepincho/C-plus-plus-Courses-FMI/tree/master/Data-structures-Algorithms-course/Homework-1) - using Stack and some kind of a decompression(2B -> BB and etc).
