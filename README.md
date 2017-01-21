@@ -1,4 +1,10 @@
-# C++ tasks during education in FMI.
+# All tasks and homeworks from different kind of courses during my education at @FMI.
+
+## Statistics and Probabilities course
+
+#### Homework 1
+
+#### Homework2
 
 ## Data Structures and Algorithms with C++ course
 
