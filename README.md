@@ -1,5 +1,7 @@
 # All tasks and homeworks from different kind of courses during my education at @FMI.
 
+## Artificial Intelligence course
+
 ## Databases course
 
 ## Statistics and Probabilities course
